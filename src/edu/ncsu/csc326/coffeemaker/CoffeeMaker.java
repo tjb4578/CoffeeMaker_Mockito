@@ -19,6 +19,11 @@ public class CoffeeMaker {
 	    recipeBook = new RecipeBook();
 		inventory = new Inventory();
 	}
+
+    public CoffeeMaker(Inventory inv, RecipeBook rBook) {
+        recipeBook = rBook;
+        inventory = inv;
+    }
 	
 	/**
 	 * Returns true if the recipe is added to the
