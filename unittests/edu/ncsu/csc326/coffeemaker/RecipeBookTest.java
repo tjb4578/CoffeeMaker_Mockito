@@ -25,10 +25,16 @@ public class RecipeBookTest extends TestCase {
 
     public void testAddRecipe(){
 
+        //Test to see if you get a positive response from adding a new recipe
         assertTrue(recipeBook.addRecipe(r1));
         Recipe[] recipeBookContents = recipeBook.getRecipes();
 
+        //Check to make sure the added recipe appears in the recipeBook
         assertEquals(r1,recipeBookContents[0]);
+
+        //Check to make sure that adding a duplicate recipe fails
+        assertFalse(recipeBook.addRecipe(r1));
+
     }
 
     public void testDeleteRecipe(){
@@ -37,9 +43,13 @@ public class RecipeBookTest extends TestCase {
 
         recipeBook.addRecipe(r1);
 
+        //Check that deleting a recipe returns its name
         assertEquals("recipe_1", recipeBook.deleteRecipe(0));
 
         verify(r1).getName();
+
+        //Check that deleting a non-existent recipe returns null
+        assertEquals(null,recipeBook.deleteRecipe(1));
     }
 
     public void testEditRecipe(){
@@ -49,11 +59,12 @@ public class RecipeBookTest extends TestCase {
         when(r2.getName()).thenReturn("recipe_2");
 
         recipeBook.addRecipe(r1);
+        //Check that
         assertEquals("recipe_1",recipeBook.editRecipe(0,r2));
         verify(r1).getName();
 
-        assertEquals("recipe_2", recipeBook.deleteRecipe(0));
-        verify(r2).getName();
+        //Check that editing a non-existent recipe returns null
+        assertEquals(null,recipeBook.editRecipe(1, r2));
     }
 
 
